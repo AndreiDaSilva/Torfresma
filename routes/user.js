@@ -9,10 +9,16 @@ router.get('/', (req, res, next) => {
     });
 });
 
-//INSERE UM PRODUTO
+//INSERE UM NOVO USER
 router.post('/', (req, res, next) => {
+    const user = {
+        nome: req.body.nome,
+        email: req.body.email,
+        senha: req.body.senha
+    }
     res.status(201).send({
-        mensagem: 'USUÁRIO CRIADO COM SUCESSO'
+        mensagem: 'USUÁRIO CRIADO COM SUCESSO',
+        userCriado: user
     });
 });
 
@@ -32,7 +38,7 @@ router.get('/:id_produto', (req, res, next) => {
 });
 
 //ALTERA UM PRODUTO
-router.patch('/', (req, res, next) => {
+router.put('/', (req, res, next) => {
     res.status(201).send({
         mensagem: 'USUÁRIO ALTERADO COM SUCESSO'
     });

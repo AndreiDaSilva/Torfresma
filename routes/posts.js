@@ -5,14 +5,22 @@ const router = express.Router();
 //RETORNAR TODOS OS POST
 router.get('/', (req, res, next) => {
     res.status(200).send({
-        mensagem: 'RETORNAR OS POST'
+        mensagem: 'RETORNAR OS POSTs'
     });
 });
 
 //CRIA UM NOVO POST
 router.post('/', (req, res, next) => {
+    const post = {
+        id_user: req.body.id_user,
+        titulo: req.body.titulo,
+        descricao: req.body.descricao,
+        data: req.body.data
+    };
+
     res.status(201).send({
-        mensagem: 'POST PUBLICADO'
+        mensagem: 'POST PUBLICADO',
+        postCriado: post
     });
 });
 
