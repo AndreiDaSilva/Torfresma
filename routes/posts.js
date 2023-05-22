@@ -1,43 +1,183 @@
-const express = require('express')
+const express = require('express');
+const moment = require('moment');
 const router = express.Router();
-
+const mysql = require('../mysql').pool;
+const user = require('../routes/user');
 
 //RETORNAR TODOS OS POST
 router.get('/', (req, res, next) => {
-    res.status(200).send({
-        mensagem: 'RETORNAR OS POSTs'
+    mysql.getConnection((error, conn) => {
+        if (error) { return res.status(500).send({ error: error }); }
+        conn.query(
+            'SELECT * FROM post;',
+            (error, result, field) => {
+                if (error) { return res.status(500).send({ error: error }); }
+                const response = {
+                    quantidade: result.length,
+                    posts: result.map(post => {
+                        return {
+                            id_post: post.id_post,
+                            autor: {
+                                id_user: post.user_id
+                            },
+                            titulo: post.titulo_post,
+                            conteudo: post.cont_post,
+                            data: post.dt_post,
+                            request: {
+                                tipo: 'GET',
+                                descricao: 'Retornar os detalhes de um post especifico',
+                                url: 'http://localhost:3000/post/' + post.id_user
+                            }
+                        }
+                    })
+                }
+                return res.status(201).send({ response })
+            }
+        )
     });
 });
 
 //CRIA UM NOVO POST
 router.post('/', (req, res, next) => {
-    const post = {
-        id_user: req.body.id_user,
-        titulo: req.body.titulo,
-        descricao: req.body.descricao,
-        data: req.body.data
-    };
+    const data = moment().format('YYYY-MM-DD');
+    mysql.getConnection((error, conn) => {
+        if (error) { return res.status(500).send({ error: error }); }
+        conn.query('SELECT * FROM user WHERE id_user = ?',
+            [req.body.id_user],
+            (error, result, field) => {
+                if (error) { res.status(500).send({ error: error }); }
+                if (result.length == 0) {
+                    return res.status(404).send({
+                        mensagem: 'Usuario informado não existe'
+                    })
+                }
+                conn.query(
+                    'INSERT INTO post (user_id, titulo_post, cont_post, dt_post) VALUES (?,?,?,?)',
+                    [req.body.id_user, req.body.titulo, req.body.descricao, data],
+                    (error, result, field) => {
+                        conn.release();
+                        if (error) { return res.status(500).send({ error: error }); }
+                        const response = {
+                            mensagem: 'POST CRIADO COM SUCESSO',
+                            NovoPost: {
+                                id_post: result.id_post,
+                                id_user: req.body.id_user,
+                                titulo: req.body.titulo,
+                                conteudo: req.body.descricao,
+                                data: data,
+                                request: {
+                                    tipo: 'GET',
+                                    descricao: 'Retornar todo os post',
+                                    url: 'http://localhost:3000/post'
+                                }
+                            }
+                        }
+                        return res.status(201).send(response);
+                    }
+                )
+            }
 
-    res.status(201).send({
-        mensagem: 'POST PUBLICADO',
-        postCriado: post
+        )
     });
 });
 
 //RETORNAR UM POST ESPECIFICO
-router.get('/:id_pedidos', (req, res, next) => {
-    const id = req.params.id_pedidos;
-    res.status(200).send({
-        mensagem: 'DETALHES DO POST',
-        id: id
+router.get('/:id_post', (req, res, next) => {
+    mysql.getConnection((error, conn) => {
+        if (error) { return res.status(500).send({ error: error }); }
+        conn.query(
+            'SELECT * FROM post WHERE id_post = ?;',
+            [req.params.id_post],
+            (error, result, field) => {
+                if (error) { return res.status(500).send({ error: error }); }
+                if (result.length == 0) {
+                    return res.status(404).send({
+                        mensagem: 'Não foi encontrado post nesse usuario'
+                    })
+                }
+                const response = {
+                    post: {
+                        id_post: result[0].id_post,
+                        id_user: result[0].user_id,
+                        titulo: result[0].titulo_post,
+                        descricao: result[0].desc_post,
+                        data: result[0].dt_post,
+                        request: {
+                            tipo: 'GET',
+                            descricao: 'Retorna todo os post',
+                            url: 'http://localhost:3000/user'
+                        }
+                    }
+                }
+                return res.status(200).send(response);
+            }
+        )
+    });
+});
+
+//RETORNAR TODOS POST DO USUARIO
+router.get('/user/:id_user', (req, res, next) => {
+    mysql.getConnection((error, conn) => {
+        if (error) { return res.status(500).send({ error: error }); }
+        conn.query(
+            'SELECT * FROM post WHERE user_id = ?;',
+            [req.params.id_user],
+            (error, result, field) => {
+                if (error) { return res.status(500).send({ error: error }); }
+                if (result.length == 0) {
+                    return res.status(404).send({
+                        mensagem: 'Não foi encontrado post com essa id'
+                    })
+                }
+                const response = {
+                    quantidade: result.length,
+                    posts: result.map(post => {
+                        return {
+                            id_post: post.id_post,
+                            id_user: post.user_id,
+                            titulo: post.titulo_post,
+                            conteudo: post.cont_post,
+                            data: post.dt_post,
+                            request: {
+                                tipo: 'GET',
+                                descricao: 'Retornar os detalhes de um post especifico',
+                                url: 'http://localhost:3000/post/' + post.id_user
+                            }
+                        }
+                    })
+                }
+                return res.status(201).send({ response })
+            }
+        )
     });
 });
 
 //DELETA O POST
 router.delete('/', (req, res, next) => {
-    res.status(201).send({
-        mensagem: 'POST EXCLUÍDO'
-    })
+    mysql.getConnection((error, conn) => {
+        if (error) { return res.status(500).send({ error: error }); }
+        conn.query(
+            `DELETE FROM post WHERE id_post = ?`,
+            [req.body.id_post],
+            (error, result, field) => {
+                if (error) { return res.status(500).send({ error: error }); }
+                const response = {
+                    mensagem: 'POST DELETADO',
+                    request: {
+                        tipo: 'POST',
+                        descricao: 'Inserir um novo post',
+                        url: 'http://localhost:3000/post',
+                        body: {
+                            id_user: 'String',
+                            titulo: 'String',
+                            descricao: 'String',
+                        }
+                    }
+                }
+                return res.status(202).send(response);
+            }
+        )
+    });
 });
 
 module.exports = router;
