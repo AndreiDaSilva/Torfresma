@@ -190,39 +190,42 @@ router.delete('/', login.obrigatorio, (req, res, next) => {
 router.put('/', login.obrigatorio, (req, res, next) => {
     const data = moment().format('YYYY-MM-DD');
     mysql.getConnection((error, conn) => {
+        if (error) { return res.status(500).send({ error: error }); }
         conn.query(
-            'INSERT INTO post (user_id, titulo_post, cont_post, dt_post, autor_post) VALUES (?,?,?,?,?)',
+            `UPDATE post
+            SET titulo_post = ?,
+                cont_post = ?,
+                dt_post = ?
+            WHERE id_post = ?`,
             [
-                req.user.id_user,
                 req.body.titulo,
                 req.body.descricao,
                 data,
-                req.user.nome
+                req.body.id_post
             ],
             (error, result, field) => {
                 conn.release();
                 if (error) { return res.status(500).send({ error: error }); }
                 const response = {
-                    mensagem: 'POST CRIADO COM SUCESSO',
-                    NovoPost: {
-                        id_post: result.id_post,
-                        id_user: req.body.id_user,
+                    mensagem: 'POST ATUALIZADO COM SUCESSO',
+                    post: {
+                        id_user: req.user.id_user,
+                        id_post: req.body.id_post,
                         titulo: req.body.titulo,
-                        conteudo: req.body.descricao,
+                        descricao: req.body.descricao,
                         data: data,
+                        autor: req.user.nome,
                         request: {
                             tipo: 'GET',
-                            descricao: 'Retornar todo os post',
-                            url: 'http://localhost:3000/post'
+                            descricao: 'Retornar os detalhes de um usuários',
+                            url: 'http://localhost:3000/user/' + req.user.id_user
                         }
                     }
                 }
-                return res.status(201).send(response);
+                return res.status(202).send(response);
             }
         )
-    }
-
-    )
+    });
 });
 
 module.exports = router;

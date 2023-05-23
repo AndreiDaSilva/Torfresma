@@ -1,1 +1,1 @@
-SELECT * from post
+DESCRIBE post
