@@ -1,1 +1,1 @@
-SELECT * FROM post WHERE user_id = 9;
+SELECT * from post
