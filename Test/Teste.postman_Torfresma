@@ -1,0 +1,265 @@
+{
+	"info": {
+		"_postman_id": "0ad85e70-0f5b-443f-8641-b6ca23842a42",
+		"name": "Teste",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "21910227"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "todos os user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/user"
+					},
+					"response": []
+				},
+				{
+					"name": "user pela id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:3000/user/13"
+					},
+					"response": []
+				},
+				{
+					"name": "criando user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Joao\",\r\n    \"email\": \"joao@joao.com.br\",\r\n    \"senha\": \"30062708\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:3000/user/cadastro"
+					},
+					"response": []
+				},
+				{
+					"name": "fazendo login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"tana@tana.com.br\",\r\n    \"senha\": \"30062708\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:3000/user/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxNywibm9tZSI6IkpvYW8iLCJlbWFpbCI6ImpvYW9Aam9hby5jb20uYnIiLCJpYXQiOjE2ODQ4OTIyNzMsImV4cCI6MTY4NDg5NTg3M30.-XmVOs8QjoSLBP69xXvguuMAr8OzMmuMlbEFFACJqkM"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:3000/user"
+					},
+					"response": []
+				},
+				{
+					"name": "alterar user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxNywibm9tZSI6IkpvYW8iLCJlbWFpbCI6ImpvYW9Aam9hby5jb20uYnIiLCJpYXQiOjE2ODQ4OTIyNzMsImV4cCI6MTY4NDg5NTg3M30.-XmVOs8QjoSLBP69xXvguuMAr8OzMmuMlbEFFACJqkM"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Rafa\",\r\n    \"email\": \"rafa@rafa.com.br\",\r\n    \"senha\": \"22556677\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:3000/user"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "post",
+			"item": [
+				{
+					"name": "todo os post",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:3000/post"
+					},
+					"response": []
+				},
+				{
+					"name": "post pela id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "javascript"
+								}
+							}
+						},
+						"url": "localhost:3000/post/22"
+					},
+					"response": []
+				},
+				{
+					"name": "todos post user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "javascript"
+								}
+							}
+						},
+						"url": "localhost:3000/post/user/16"
+					},
+					"response": []
+				},
+				{
+					"name": "criando post",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxNiwibm9tZSI6IlRhbmFlbGkgRWRuYSBCdW1nYXJ0ZW0iLCJlbWFpbCI6InRhbmFAdGFuYS5jb20uYnIiLCJpYXQiOjE2ODQ4OTc0OTYsImV4cCI6MTY4NDkwMTA5Nn0.qO-meevqdyzhTx6vY4B2u0xpaycO3TIEkrYJNzJWhRM"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer Token",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Outro post\",\r\n    \"descricao\": \"Novo post será criado\"\r\n}"
+						},
+						"url": "localhost:3000/post"
+					},
+					"response": []
+				},
+				{
+					"name": "Deletando POST pela id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxNiwibm9tZSI6IlRhbmFlbGkgRWRuYSBCdW1nYXJ0ZW0iLCJlbWFpbCI6InRhbmFAdGFuYS5jb20uYnIiLCJpYXQiOjE2ODQ4OTczMTIsImV4cCI6MTY4NDkwMDkxMn0.VFZcVqF1vqRSoZvv7ZZtBqxc5cw5pbspZWu3kFg1kUQ"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:3000/post/27"
+					},
+					"response": []
+				},
+				{
+					"name": "alterar um post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxNiwibm9tZSI6IlRhbmFlbGkgRWRuYSBCdW1nYXJ0ZW0iLCJlbWFpbCI6InRhbmFAdGFuYS5jb20uYnIiLCJpYXQiOjE2ODQ4OTc0OTYsImV4cCI6MTY4NDkwMTA5Nn0.qO-meevqdyzhTx6vY4B2u0xpaycO3TIEkrYJNzJWhRM"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Novo Titulo\",\r\n    \"descricao\": \"Esse post foi alterado novamete\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:3000/post/27"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
