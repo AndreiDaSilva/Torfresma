@@ -11,8 +11,8 @@ router.get('/user/:id_user', PostControllers.getPostUser);
 
 router.post('/', login.obrigatorio, PostControllers.postNewPost);
 
-router.delete('/:id_post', login.obrigatorio, PostControllers.deletePost);
-
 router.put('/:id_post', login.obrigatorio, PostControllers.putPost);
+
+router.delete('/:id_post', login.obrigatorio, PostControllers.deletePost);
 
 module.exports = router;

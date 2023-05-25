@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const swaggerUI = require('swagger-ui-express');
+const swagger = require('./openapi.json')
 
 const rotaUser = require('./routes/user');
 const rotaPost = require('./routes/posts');
@@ -25,6 +27,7 @@ app.use((req, res, next) => {
 
 app.use('/user', rotaUser);
 app.use('/post', rotaPost);
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swagger));
 
 
 app.use((req, res, next) => {

@@ -1,0 +1,875 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Simples API Torfresma - Teste",
+    "description": "API de gerenciamento de usuarios e post\n\nLinks:\n- [Repositório da API](https://github.com/AndreiDaSilva/Torfresma.git)",
+    "contact": {
+      "email": "silva.andrei@outlook.com.br"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "description": "SwaggerHub API Auto Mocking",
+      "url": "/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "post",
+      "description": "Tudo sobre o post",
+      "externalDocs": {
+        "description": "abrir",
+        "url": "http://swagger.io/posts"
+      }
+    },
+    {
+      "name": "user",
+      "description": "Tudo sobre o usuário",
+      "externalDocs": {
+        "description": "abrir",
+        "url": "http://swagger.io/user"
+      }
+    }
+  ],
+  "paths": {
+    "/post": {
+      "get": {
+        "tags": [
+          "post"
+        ],
+        "summary": "Obter todos os posts",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostsResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro do servidor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "post"
+        ],
+        "summary": "Criar um novo post",
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewPostRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Criado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewPostResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro do servidor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/post/user/{id_user}": {
+      "get": {
+        "tags": [
+          "post"
+        ],
+        "summary": "Todos os post do usuário",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id_user",
+            "required": true,
+            "description": "ID do usuário",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Usuário não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro do servidor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/post/{id_post}": {
+      "get": {
+        "tags": [
+          "post"
+        ],
+        "summary": "Obter um post pelo ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id_post",
+            "required": true,
+            "description": "ID do post",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Post não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro do servidor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "post"
+        ],
+        "summary": "Atualizar um post pelo ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id_post",
+            "required": true,
+            "description": "ID do post",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePostRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Aceito",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdatePostResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro do servidor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "post"
+        ],
+        "summary": "Excluir um post pelo ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id_post",
+            "required": true,
+            "description": "ID do post",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Aceito",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro do servidor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Obter todos os Usuarios",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro do servidor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Atulizar dados do usuario",
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Aceito",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro do servidor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Deletar usuario",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id_user",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Aceito",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro do servidor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/cadastro": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Criar um novo usuário",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Criado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewUserResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro do servidor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Fazer Login",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUserLogin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Criado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserLogin"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Falha de autenticação",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro do servidor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/{id_user}": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Buscar usuário pelo login",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id_user",
+            "required": true,
+            "description": "ID do usuário",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Post não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro do servidor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "token": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "PostsResponse": {
+        "type": "object",
+        "properties": {
+          "quantidade": {
+            "type": "integer",
+            "description": "Número de posts retornados"
+          },
+          "posts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Post"
+            }
+          }
+        }
+      },
+      "PostResponse": {
+        "type": "object",
+        "properties": {
+          "post": {
+            "$ref": "#/components/schemas/Post"
+          }
+        }
+      },
+      "NewPostRequest": {
+        "type": "object",
+        "properties": {
+          "titulo": {
+            "type": "string",
+            "description": "Título do post"
+          },
+          "descricao": {
+            "type": "string",
+            "description": "Descrição do post"
+          }
+        }
+      },
+      "NewPostResponse": {
+        "type": "object",
+        "properties": {
+          "mensagem": {
+            "type": "string",
+            "description": "Mensagem de sucesso"
+          },
+          "novoPost": {
+            "$ref": "#/components/schemas/Post"
+          }
+        }
+      },
+      "UpdatePostRequest": {
+        "type": "object",
+        "properties": {
+          "titulo": {
+            "type": "string",
+            "description": "Novo título do post"
+          },
+          "descricao": {
+            "type": "string",
+            "description": "Nova descrição do post"
+          }
+        }
+      },
+      "UpdatePostResponse": {
+        "type": "object",
+        "properties": {
+          "mensagem": {
+            "type": "string",
+            "description": "Mensagem de sucesso"
+          },
+          "post": {
+            "$ref": "#/components/schemas/Post"
+          }
+        }
+      },
+      "UpdateUserRequest": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "novo nome"
+          },
+          "email":{
+            "type": "string",
+            "description": "novo email"
+          },
+          "senha": {
+            "type": "string",
+            "description": "nova senha"
+          }
+        }
+      },
+      "DeleteResponse": {
+        "type": "object",
+        "properties": {
+          "mensagem": {
+            "type": "string",
+            "description": "Mensagem de sucesso"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Mensagem de erro"
+          }
+        }
+      },
+      "UserResponse": {
+        "type": "object",
+        "properties": {
+          "post": {
+            "$ref": "#/components/schemas/User"
+          }
+        }
+      },
+      "NewUserRequest": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome do usuário"
+          },
+          "email": {
+            "type": "string",
+            "description": "email do usuário"
+          },
+          "senha": {
+            "type": "string",
+            "description": "senha do usuário"
+          }
+        }
+      },
+      "NewUserResponse": {
+        "type": "object",
+        "properties": {
+          "mensagem": {
+            "type": "string",
+            "description": "Mensagem de sucesso"
+          },
+          "novoUser": {
+            "$ref": "#/components/schemas/User"
+          }
+        }
+      },
+      "UserLogin": {
+        "type": "object",
+        "properties": {
+          "mensagem": {
+            "type": "string",
+            "description": "mensagem de sucesso"
+          },
+          "token": {
+            "type": "object",
+            "description": "token de autenticação"
+          }
+        }
+      },
+      "NewUserLogin":{
+        "type": "object",
+        "properties": {
+          "email":{
+            "type": "string",
+            "description": "email do usuário ja cadastrado"
+          },
+          "senha":{
+            "type": "string",
+            "description": "senha do usuário"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id_user": {
+            "type": "integer",
+            "description": "ID do user"
+          },
+          "nome": {
+            "type": "string",
+            "description": "ID do user"
+          },
+          "email": {
+            "type": "string",
+            "description": "ID do user"
+          }
+        }
+      },
+      "Post": {
+        "type": "object",
+        "properties": {
+          "id_post": {
+            "type": "integer",
+            "description": "ID do post"
+          },
+          "titulo": {
+            "type": "string",
+            "description": "Título do post"
+          },
+          "conteudo": {
+            "type": "string",
+            "description": "Conteúdo do post"
+          },
+          "data": {
+            "type": "string",
+            "format": "date",
+            "description": "Data do post"
+          },
+          "autor": {
+            "type": "object",
+            "properties": {
+              "id_user": {
+                "type": "integer",
+                "description": "ID do autor do post"
+              },
+              "nome": {
+                "type": "string",
+                "description": "Nome do autor do post"
+              },
+              "email": {
+                "type": "string",
+                "description": "E-mail do autor do post"
+              }
+            }
+          },
+          "request": {
+            "type": "object",
+            "properties": {
+              "tipo": {
+                "type": "string",
+                "description": "Tipo da requisição"
+              },
+              "descricao": {
+                "type": "string",
+                "description": "Descrição da requisição"
+              },
+              "url": {
+                "type": "string",
+                "description": "URL da requisição"
+              },
+              "body": {
+                "type": "object",
+                "properties": {
+                  "titulo": {
+                    "type": "string",
+                    "description": "Título do corpo da requisição"
+                  },
+                  "descricao": {
+                    "type": "string",
+                    "description": "Descrição do corpo da requisição"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

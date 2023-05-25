@@ -200,8 +200,8 @@ exports.deletePost = (req, res, next) => {
                 if (error) { return res.status(500).send({ error: error }); }
                 console.log(result)
                 if(result.affectedRows === 0){
-                    return res.status(402).send({
-                        mensagem: 'NÃO AUTORIZADO'
+                    return res.status(401).send({
+                        mensagem: 'FALHA NA AUTENTICAÇÃO'
                     });
                 }
                 const response = {
@@ -244,8 +244,8 @@ exports.putPost = (req, res, next) => {
                 conn.release();
                 if (error) { return res.status(500).send({ error: error }); }
                 if(result.affectedRows === 0){
-                    return res.status(402).send({
-                        mensagem: 'NÃO AUTORIZADO'
+                    return res.status(401).send({
+                        mensagem: 'FALHA NA AUTENTICAÇÃO'
                     });
                 }
                 const response = {
