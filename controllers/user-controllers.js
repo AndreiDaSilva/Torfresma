@@ -23,7 +23,7 @@ exports.getUsers = (req, res, next) => {
                             request: {
                                 tipo: 'GET',
                                 descricao: 'Retornar os detalhes de um user especifico',
-                                url: proces.env.URL_API + 'user/' + user.id_user
+                                url: process.env.URL_API + 'user/' + user.id_user
                             }
                         }
                     })
@@ -55,7 +55,7 @@ exports.getUserId = (req, res, next) => {
                         request: {
                             tipo: 'GET',
                             descricao: 'Retorna todo os user',
-                            url: proces.env.URL_API + 'user'
+                            url: process.env.URL_API + 'user'
                         }
                     }
                 }
@@ -88,7 +88,7 @@ exports.postNewUser = (req, res, next) => {
                                     request: {
                                         tipo: 'POST',
                                         descricao: 'Fazer Login',
-                                        url: proces.env.URL_API + 'user/login',
+                                        url: process.env.URL_API + 'user/login',
                                         body: {
                                             email: "String",
                                             senha: "String"
@@ -155,7 +155,7 @@ exports.deleteUser = (req, res, next) => {
                     request: {
                         tipo: 'POST',
                         descricao: 'Inserir um novo Usuário',
-                        url: proces.env.URL_API + 'cadastro',
+                        url: process.env.URL_API + 'cadastro',
                         body: {
                             nome: 'String',
                             email: 'String',
@@ -195,7 +195,7 @@ exports.putUser = (req, res, next) => {
                         request: {
                             tipo: 'GET',
                             descricao: 'Retornar os detalhes de um usuários',
-                            url: proces.env.URL_API + 'user/' + req.user.id_user
+                            url: process.env.URL_API + 'user/' + req.user.id_user
                         }
                     }
                 }
