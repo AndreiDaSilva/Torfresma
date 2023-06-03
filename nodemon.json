@@ -1,9 +1,9 @@
 {
     "env": {
-        "MYSQL_USER": "bba42bb1a2efab",
-        "MYSQL_PASSWORD": "62bf7386",
-        "MYSQL_DATABASE": "heroku_dafc7601e95abdc",
-        "MYSQL_HOST": "us-cdbr-east-06.cleardb.net",
+        "MYSQL_USER": "root",
+        "MYSQL_PASSWORD": "root",
+        "MYSQL_DATABASE": "torfresmaAPI",
+        "MYSQL_HOST": "localhost",
         "MYSQL_PORT": 3306,
 
         "JWT_TOKEN": "tokensecreto" 
