@@ -3,7 +3,7 @@ const router = express.Router();
 const login = require('../middleware/login');
 
 
-const PostControllers = require('../controllers/post-controllers');
+const PostControllers = require('../../../controllers/post-controllers');
 
 router.get('/', PostControllers.getPosts);
 router.get('/:id_post', PostControllers.getPostId);
