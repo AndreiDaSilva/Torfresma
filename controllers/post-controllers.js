@@ -34,7 +34,7 @@ exports.getPosts = (req, res, next) => {
                             request: {
                                 tipo: 'POST',
                                 descricao: 'Criar um post',
-                                url: 'http://localhost:3000/post/',
+                                url: proces.env.URL_API + 'post/',
                                 body: {
                                     titulo: 'String',
                                     descricao: 'String',
@@ -86,7 +86,7 @@ exports.getPostId = (req, res, next) => {
                         request: {
                             tipo: 'POST',
                             descricao: 'Criar um post',
-                            url: 'http://localhost:3000/post/',
+                            url: proces.env.URL_API + 'post/',
                             body: {
                                 titulo: 'String',
                                 descricao: 'String',
@@ -139,7 +139,7 @@ exports.getPostUser = (req, res, next) => {
                             request: {
                                 tipo: 'POST',
                                 descricao: 'Criar um post',
-                                url: 'http://localhost:3000/post/',
+                                url: proces.env.URL_API + 'post/',
                                 body: {
                                     titulo: 'String',
                                     descricao: 'String',
@@ -179,7 +179,7 @@ exports.postNewPost = (req, res, next) => {
                         request: {
                             tipo: 'GET',
                             descricao: 'Retornar todo os post',
-                            url: 'http://localhost:3000/post',
+                            url: proces.env.URL_API + 'post',
 
                         }
                     }
@@ -209,7 +209,7 @@ exports.deletePost = (req, res, next) => {
                     request: {
                         tipo: 'POST',
                         descricao: 'Inserir um novo post',
-                        url: 'http://localhost:3000/post',
+                        url: proces.env.URL_API + 'post',
                         body: {
                             id_user: 'String',
                             titulo: 'String',
@@ -260,7 +260,7 @@ exports.putPost = (req, res, next) => {
                         request: {
                             tipo: 'GET',
                             descricao: 'Retornar os detalhes de um usuários',
-                            url: 'http://localhost:3000/user/' + req.user.id_user
+                            url: proces.env.URL_API + 'user/' + req.user.id_user
                         }
                     }
                 }
