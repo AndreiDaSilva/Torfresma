@@ -412,16 +412,9 @@
         "tags": [
           "user"
         ],
-        "summary": "Deletar usuario",
+        "summary": "Deletar usuário",
         "parameters": [
-          {
-            "in": "query",
-            "name": "id_user",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
+          
         ],
         "security": [
           {
