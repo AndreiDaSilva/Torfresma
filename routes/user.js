@@ -3,7 +3,7 @@ const router = express.Router();
 const login = require('../middleware/login');
 
 
-const UserControllers = require('../controllers/user-controllers');
+const UserControllers = require('../controllers/userControllers');
 
 router.get('/', UserControllers.getUsers);
 router.get('/:id_user', UserControllers.getUserId);
