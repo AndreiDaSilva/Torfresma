@@ -24,7 +24,7 @@ exports.getUsers = (req, res) => {
                         }
                     })
                 }
-                return res.status(201).json(response)
+                return res.status(201).json(response.users)
             });
     });
 };
