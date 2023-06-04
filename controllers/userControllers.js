@@ -24,7 +24,7 @@ exports.getUsers = (req, res) => {
                         }
                     })
                 }
-                return res.status(201).json(response.users)
+                return res.status(201).json(response)
             });
     });
 };
@@ -48,14 +48,9 @@ exports.getUserId = (req, res, next) => {
                         id_user: result[0].id_user,
                         nome: result[0].nm_user,
                         email: result[0].email_user,
-                        request: {
-                            tipo: 'GET',
-                            descricao: 'Retorna todo os user',
-                            url: process.env.URL_API + 'user'
-                        }
                     }
                 }
-                return res.status(200).send(response);
+                return res.status(200).json(response);
             });
     });
 }
@@ -81,19 +76,9 @@ exports.postNewUser = (req, res, next) => {
                                     id_user: result.insertId,
                                     nome: req.body.nome,
                                     email: req.body.email,
-                                    request: {
-                                        tipo: 'POST',
-                                        descricao: 'Fazer Login',
-                                        url: process.env.URL_API + 'user/login',
-                                        body: {
-                                            email: "String",
-                                            senha: "String"
-                                        }
-                                    }
-
                                 }
                             }
-                            return res.status(201).send({ response });
+                            return res.status(201).json(response);
                         });
                 });
             }
@@ -124,7 +109,7 @@ exports.postLoginUser = (req, res, next) => {
                         {
                             expiresIn: "1h"
                         });
-                    return res.status(200).send({
+                    return res.status(200).json({
                         mensagem: 'USUÁRIO AUTENTICADO COM SUCESSO',
                         token: token
                     });
@@ -147,19 +132,9 @@ exports.deleteUser = (req, res, next) => {
                 if (error) { return res.status(500).send({ error: error }); }
 
                 const response = {
-                    mensagem: 'USUÁRIO DELETADO',
-                    request: {
-                        tipo: 'POST',
-                        descricao: 'Inserir um novo Usuário',
-                        url: process.env.URL_API + 'cadastro',
-                        body: {
-                            nome: 'String',
-                            email: 'String',
-                            senha: 'String',
-                        }
-                    }
+                    mensagem: 'USUÁRIO DELETADO'
                 }
-                return res.status(202).send(response);
+                return res.status(202).json(response);
             });
     });
 };
@@ -188,14 +163,9 @@ exports.putUser = (req, res, next) => {
                         id_user: req.user.id_user,
                         nome: req.body.nome,
                         email: req.body.email,
-                        request: {
-                            tipo: 'GET',
-                            descricao: 'Retornar os detalhes de um usuários',
-                            url: process.env.URL_API + 'user/' + req.user.id_user
-                        }
                     }
                 }
-                return res.status(202).send(response);
+                return res.status(202).json(response);
             });
     });
 }

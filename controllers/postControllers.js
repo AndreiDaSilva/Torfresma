@@ -34,7 +34,7 @@ exports.getPosts = (req, res, next) => {
                         }
                     })
                 }
-                return res.status(201).json({ response })
+                return res.status(201).json(response)
             });
     });
 };
@@ -74,18 +74,9 @@ exports.getPostId = (req, res, next) => {
                             nome: result[0].nm_user,
                             email: result[0].email_user
                         },
-                        request: {
-                            tipo: 'POST',
-                            descricao: 'Criar um post',
-                            url: process.env.URL_API + 'post/',
-                            body: {
-                                titulo: 'String',
-                                descricao: 'String',
-                            }
-                        }
                     }
                 }
-                return res.status(200).send(response);
+                return res.status(200).json(response.Posts);
             });
     });
 };
@@ -120,26 +111,16 @@ exports.getPostUser = (req, res, next) => {
                         nome: result[0].nm_user,
                         email: result[0].email_user,
                     },
-                    quantidade: result.length,
                     posts: result.map(post => {
                         return {
                             id_post: post.id_post,
                             titulo: post.titulo_post,
                             conteudo: post.cont_post,
                             data: post.dt_post,
-                            request: {
-                                tipo: 'POST',
-                                descricao: 'Criar um post',
-                                url: process.env.URL_API + 'post/',
-                                body: {
-                                    titulo: 'String',
-                                    descricao: 'String',
-                                }
-                            }
                         }
                     })
                 }
-                return res.status(201).send({ response })
+                return res.status(201).json(response)
             });
     });
 };
@@ -167,15 +148,9 @@ exports.postNewPost = (req, res, next) => {
                         titulo: req.body.titulo,
                         conteudo: req.body.descricao,
                         data: data,
-                        request: {
-                            tipo: 'GET',
-                            descricao: 'Retornar todo os post',
-                            url: process.env.URL_API + 'post',
-
-                        }
                     }
                 }
-                return res.status(201).send(response);
+                return res.status(201).json(response);
             });
     });
 };
@@ -197,16 +172,6 @@ exports.deletePost = (req, res, next) => {
                 }
                 const response = {
                     mensagem: 'POST DELETADO',
-                    request: {
-                        tipo: 'POST',
-                        descricao: 'Inserir um novo post',
-                        url: process.env.URL_API + 'post',
-                        body: {
-                            id_user: 'String',
-                            titulo: 'String',
-                            descricao: 'String',
-                        }
-                    }
                 }
                 return res.status(202).send(response);
 
