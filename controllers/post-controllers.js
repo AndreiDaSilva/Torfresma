@@ -18,8 +18,8 @@ exports.getPosts = (req, res, next) => {
             (error, result, field) => {
                 conn.release();
                 if (error) { return res.status(500).send({ error: error }); }
+
                 const response = {
-                    quantidade: result.length,
                     posts: result.map(post => {
                         return {
                             id_post: post.id_post,
@@ -31,19 +31,10 @@ exports.getPosts = (req, res, next) => {
                                 nome: post.nm_user,
                                 email: post.email_user
                             },
-                            request: {
-                                tipo: 'POST',
-                                descricao: 'Criar um post',
-                                url: process.env.URL_API + 'post/',
-                                body: {
-                                    titulo: 'String',
-                                    descricao: 'String',
-                                }
-                            }
                         }
                     })
                 }
-                return res.status(201).send({ response })
+                return res.status(201).json({ response })
             });
     });
 };
