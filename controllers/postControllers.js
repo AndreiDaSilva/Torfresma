@@ -1,5 +1,5 @@
 const moment = require('moment');
-const mysql = require('../mysql').pool;
+const mysql = require('../models/mysql').pool;
 
 exports.getPosts = (req, res, next) => {
     mysql.getConnection((error, conn) => {

@@ -1,8 +1,10 @@
-const mysql = require('../mysql').pool;
+const mysql = require('../models/mysql').pool;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-exports.getUsers = (req, res, next) => {
+
+
+exports.getUsers = (req, res) => {
     mysql.getConnection((error, conn) => {
         if (error) { return res.status(500).send({ error: error }); }
         conn.query(
@@ -14,21 +16,15 @@ exports.getUsers = (req, res, next) => {
                 conn.release();
                 if (error) { return res.status(500).send({ error: error }); }
                 const response = {
-                    quantidade: result.length,
                     users: result.map(user => {
                         return {
                             id_user: user.id_user,
                             nome: user.nm_user,
                             email: user.email_user,
-                            request: {
-                                tipo: 'GET',
-                                descricao: 'Retornar os detalhes de um user especifico',
-                                url: process.env.URL_API + 'user/' + user.id_user
-                            }
                         }
                     })
                 }
-                return res.status(201).send({ response })
+                return res.status(201).json(response)
             });
     });
 };

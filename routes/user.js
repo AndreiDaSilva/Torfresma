@@ -3,16 +3,16 @@ const router = express.Router();
 const login = require('../middleware/login');
 
 
-const UserControllers = require('../controllers/userControllers');
+const userControllers = require('../controllers/userControllers');
 
-router.get('/', UserControllers.getUsers);
-router.get('/:id_user', UserControllers.getUserId);
+router.get('/', userControllers.getUsers);
+router.get('/:id_user', userControllers.getUserId);
 
-router.post('/cadastro', UserControllers.postNewUser);
-router.post('/login', UserControllers.postLoginUser);
+router.post('/cadastro', userControllers.postNewUser);
+router.post('/login', userControllers.postLoginUser);
 
-router.put('/', login.obrigatorio, UserControllers.putUser);
+router.put('/', login.obrigatorio, userControllers.putUser);
 
-router.delete('/', login.obrigatorio, UserControllers.deleteUser);
+router.delete('/', login.obrigatorio, userControllers.deleteUser);
 
 module.exports = router;
