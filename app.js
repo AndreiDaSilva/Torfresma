@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
@@ -9,6 +10,7 @@ const rotaUser = require('./routes/user');
 const rotaPost = require('./routes/posts');
 
 app.use(morgan('dev'));
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
