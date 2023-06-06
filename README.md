@@ -21,3 +21,38 @@ Preferencialmente utilizar a linguagem Node.JS. Se utilizar outra, justifique o 
 - Documentação clara e concisa da API, de acordo com as melhores práticas de documentação de APIs.
 - Inclusão de testes unitários e testes de integração para a API, usando uma ferramenta de teste adequada.
 - Qualidade geral do código, incluindo legibilidade, modularidade, segurança, comentários e replicabilidade.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Torfresma Simples API
+
+Essa é uma api, simples para gerenciamento de usuarios e posts
+
+## Instalação
+Com o Node JS já instalado e configurado
+
+1. Clone o repositório: 
+git clone https://github.com/AndreiDaSilva/Torfresma.git
+
+2. Instale as dependências:
+cd Torfresma
+npm install
+
+4. Configuração:
+
+- Configure o banco de dados e crie as tabelas conforme o arquivo 
+SQL>DataBase.sql
+
+## Uso
+
+Aplicação pode ser utilizado atráves de softwares de requições com Isonnia ou Postman
+
+npm start 
+
+Abra seu navegador e acesse localhost:3000/api-docs para visualizar a documentação da API.
+
+
+
+
+
+ 
+
